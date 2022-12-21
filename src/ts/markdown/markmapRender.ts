@@ -2,7 +2,7 @@ import {Constants} from "../constants";
 import {addScript} from "../util/addScript";
 import {markmapRenderAdapter} from "./adapterRender";
 
-declare const window: any;
+declare const markmap: any;
 const enabled: Record<string, boolean> = {};
 
 const transform = (transformer: any,content: string)=>{
@@ -12,14 +12,13 @@ const transform = (transformer: any,content: string)=>{
         enabled[key] = true;
     });
     const { styles, scripts } = transformer.getAssets(keys);
-    const { markmap } = window;
     if (styles) markmap.loadCSS(styles);
     if (scripts) markmap.loadJS(scripts);
     return result;
 }
 
 const init = (el: HTMLElement,code: string) => {
-    const { Transformer, Markmap, deriveOptions , globalCSS} = window.markmap;
+    const { Transformer, Markmap, deriveOptions} = markmap;
     const transformer = new Transformer();
     el.innerHTML = '<svg style="width:100%"></svg>';
     const svg = el.firstChild as SVGElement;
@@ -37,20 +36,13 @@ export const markmapRender = (element: HTMLElement, cdn = Constants.CDN, theme: 
     if (markmapElements.length === 0) {
         return;
     }
-    addScript(`${cdn}/src/js/markmap/markmap.min.js`, "vditorMermaidScript").then(() => {
+    addScript(`${cdn}/dist/js/markmap/markmap.min.js`, "vditorMarkmapScript").then(() => {
         markmapElements.forEach((item) => {
             const code = markmapRenderAdapter.getCode(item);
-            if (item.getAttribute("data-processed") === "true" || code.trim() === "") {
+            if (code.trim() === "") {
                 return;
             }
-            const render = document.createElement("div")
-            render.className = "language-markmap"
-            item.parentNode.appendChild(render)
-            init(render,code)
-    
-            if(item.parentNode.childNodes[0].nodeName == "CODE"){
-                item.parentNode.removeChild(item.parentNode.childNodes[0])
-            }
+            init(item as HTMLElement,code)
         });
     });
 

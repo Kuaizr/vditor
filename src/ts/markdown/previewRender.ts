@@ -14,7 +14,7 @@ import {lazyLoadImageRender} from "./lazyLoadImageRender";
 import {mathRender} from "./mathRender";
 import {mediaRender} from "./mediaRender";
 import {mermaidRender} from "./mermaidRender";
-import {markmapRender} from "../markdown/markmapRender";
+import {markmapRender} from "./markmapRender";
 import {mindmapRender} from "./mindmapRender";
 import {plantumlRender} from "./plantumlRender";
 import {setLute} from "./setLute";
