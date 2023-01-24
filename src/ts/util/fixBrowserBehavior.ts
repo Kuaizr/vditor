@@ -449,6 +449,16 @@ export const execAfterRender = (vditor: IVditor, options = {
     } else if (vditor.currentMode === "sv") {
         processSVAfterRender(vditor, options);
     }
+    // 这里我需要对base64格式的图片代码块做一些约束
+    let imgs = document.getElementsByTagName("img")
+    for(let i = 0; i < imgs.length; i++){
+        let targetNode = <HTMLElement>imgs[i].parentNode.parentNode.firstChild.firstChild
+        if(targetNode.nodeName == "CODE"){
+            console.log(targetNode)
+            targetNode.style.height = "100px"
+        }
+    }
+    
 };
 
 export const fixList = (range: Range, vditor: IVditor, pElement: HTMLElement | false, event: KeyboardEvent) => {
