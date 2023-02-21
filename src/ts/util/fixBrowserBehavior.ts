@@ -875,42 +875,42 @@ export const fixTable = (vditor: IVditor, event: KeyboardEvent, range: Range) =>
             return true;
         }
         // 上方新添加一行
-        if (matchHotKey("⇧⌘F", event)) {
+        if (matchHotKey("⇧⌘insert", event)) {
             insertRowAbove(vditor, range, cellElement);
             event.preventDefault();
             return true;
         }
 
         // 下方新添加一行 https://github.com/Vanessa219/vditor/issues/46
-        if (matchHotKey("⌘=", event)) {
+        if (matchHotKey("⌘insert", event)) {
             insertRow(vditor, range, cellElement);
             event.preventDefault();
             return true;
         }
 
         // 左方新添加一列
-        if (matchHotKey("⇧⌘G", event)) {
+        if (matchHotKey("⌘left", event)) {
             insertColumn(vditor, tableElement, cellElement, "beforebegin");
             event.preventDefault();
             return true;
         }
 
         // 后方新添加一列
-        if (matchHotKey("⇧⌘=", event)) {
+        if (matchHotKey("⌘right", event)) {
             insertColumn(vditor, tableElement, cellElement);
             event.preventDefault();
             return true;
         }
 
         // 删除当前行
-        if (matchHotKey("⌘-", event)) {
+        if (matchHotKey("⌘delete", event)) {
             deleteRow(vditor, range, cellElement);
             event.preventDefault();
             return true;
         }
 
         // 删除当前列
-        if (matchHotKey("⇧⌘-", event)) {
+        if (matchHotKey("⇧⌘delete", event)) {
             deleteColumn(vditor, range, tableElement, cellElement);
             event.preventDefault();
             return true;
